@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"ginblog/models"
+	"gogin/models"
 	"testing"
 )
 

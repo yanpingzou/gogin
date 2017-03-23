@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"fmt"
-	"ginblog/models"
+	"gogin/models"
 	"gopkg.in/gin-gonic/gin.v1"
 	"net/http"
 	"strconv"
