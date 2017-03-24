@@ -1,14 +1,16 @@
 package main
 
 import (
-	"gogin/models"
+	"flag"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
-var router *gin.Engine
+var (
+	router *gin.Engine
+)
 
 func main() {
-	models.InitDB()
+	flag.Parse()
 	router = gin.New()
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())

@@ -1,9 +1,5 @@
 package models
 
-//import (
-//	"time"
-//)
-
 type User struct {
 	ID       int64  `json:"id" database:"id" form:"name"`
 	Name     string `json:"name" form:"name"`
@@ -13,6 +9,9 @@ type User struct {
 }
 
 func (user *User) Insert() (int64, error) {
+	r := rds.Get()
+	r.Do("SET", "key1", "value1")
+	defer r.Close()
 	stmt, err := db.Prepare("INSERT INTO user(`name`,email,password) VALUES (?, ?, ?)") // ? = placeholder
 	if err != nil {
 		return 0, err
