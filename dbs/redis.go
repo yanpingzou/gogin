@@ -15,7 +15,7 @@ func InitRedis() *redis.Pool {
 	//rds := Rds.Get()
 	//defer rds.Close()
 	//rds.Do("SET", "key", "value")
-	redis_host = "172.16.18.201:6379"
+	redis_host = "192.168.1.8:6379"
 	db_num = 0
 	return &redis.Pool{
 		MaxIdle:     3,
@@ -37,6 +37,13 @@ func InitRedis() *redis.Pool {
 				return nil, err
 			}
 			return c, nil
+		},
+		TestOnBorrow: func(c redis.Conn, t time.Time) error {
+			if time.Since(t) < time.Minute {
+				return nil
+			}
+			_, err := c.Do("PING")
+			return err
 		},
 	}
 }

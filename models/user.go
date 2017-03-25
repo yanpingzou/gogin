@@ -9,9 +9,6 @@ type User struct {
 }
 
 func (user *User) Insert() (int64, error) {
-	r := rds.Get()
-	r.Do("SET", "key1", "value1")
-	defer r.Close()
 	stmt, err := db.Prepare("INSERT INTO user(`name`,email,password) VALUES (?, ?, ?)") // ? = placeholder
 	if err != nil {
 		return 0, err
@@ -25,5 +22,8 @@ func (user *User) Insert() (int64, error) {
 	if err != nil {
 		return 0, err
 	}
+	r := rds.Get()
+	r.Do("SET", "key1", lastId)
+	defer r.Close()
 	return lastId, nil
 }

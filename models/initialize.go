@@ -1,10 +1,17 @@
 package models
 
 import (
+	"database/sql"
+	"github.com/garyburd/redigo/redis"
 	"gogin/dbs"
 )
 
 var (
-	db  = dbs.InitDB()
-	rds = dbs.InitRedis()
+	db  *sql.DB
+	rds *redis.Pool
 )
+
+func InitConnect() {
+	rds = dbs.InitRedis()
+	db = dbs.InitDB()
+}
