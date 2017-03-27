@@ -7,7 +7,7 @@ import (
 
 func InitDB() *sql.DB {
 	MysqlDB, err := sql.Open("mysql",
-		"h2_user:tdfs.123@tcp(192.168.1.8:3306)/h2_gin?charset=utf8mb4&parseTime=true")
+		"h2_user:tdfs.123@tcp(172.16.18.201:3306)/h2_gin?charset=utf8mb4&parseTime=true")
 	if err != nil {
 		panic(err)
 	}

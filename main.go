@@ -2,7 +2,8 @@ package main
 
 import (
 	"gogin/models"
-	"gopkg.in/gin-gonic/gin.v1"
+	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/static"
 )
 
 var (
@@ -10,7 +11,8 @@ var (
 )
 
 func main() {
-	router = gin.New()
+	router = gin.Default()
+	router.Use(static.Serve("/static", static.LocalFile("static", true)))
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 	router.LoadHTMLGlob("templates/*")
